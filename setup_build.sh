@@ -10,12 +10,12 @@ lb config \
 	--apt-recommends true \
 	-a amd64 \
 	--binary-images iso \
-	--distribution bullseye \
+	--distribution trixie \
 	--backports false \
 	--mode debian \
 	--system live \
 	--debian-installer-gui false \
-	--archive-areas "main contrib non-free" \
+	--archive-areas "main contrib non-free non-free-firmware" \
 	--security false \
 	--win32-loader false \
 	--apt-indices false \
