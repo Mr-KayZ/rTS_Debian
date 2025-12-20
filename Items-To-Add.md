@@ -10,8 +10,9 @@
 ## Hardware testing:
 - memtest86+ - RAM testing via GRUB menu
 - stress-ng - CPU and memory testing
-- mprime - CPU stability testing
-- badblocks - Potentially in e2fsprogs, surface scan tool for drives
+- sysbench - Already preinstalled? Used for stability testing
+- badblocks - Surface scan tool for drives
+    - Already part of e2fsprogs - preinstalled?
 - fio - Disk I/O benchmarking
 
 ## Advanced hardware testing
@@ -23,14 +24,28 @@
 ## Other disk tools
 - ddrescue - Maybe be present in gddrescue for failing drives
 - safecopy - Alternative to ddrescue for damaged media
-- TestDisk - Partition recovery software, alternative to ddrescue and safecopy perhaps?
+- TestDisk - Partition recovery software, alternative to ddrescue and safecopy perhaps? Can also maybe fix boot drives via rebuildbs
 - shred - Secure file deletion (should be part of coreutils)
 - scrub - Pattern-based disk wiping
 - dislocker - Read and write to MS bitlocker encrypted drives
 
 ## Windows recovery
 - hivexregedit - Registry viewing/editing - Search up how to use this in thorough detail
+    - Part of libguestfs-tools (not preinstalled) at 500 mb - see what other tools are there
 - ntfsfix - Fix Windows and basic NTFS inconsistencies, clear dirty flags
-- ms-sys - Boot sector repair, write to Windows MBR or VBR partitions
+    - Part of the ntfs-3g package
+- ms-sys - Boot sector repair, write to Windows MBR or VBR partitions - Do we really need this?
 
-## Remove 
+---
+## Preinstalled packages
+- e2fsprogs - Has the following:
+    - badblocks
+- sysbench
+- stress
+- gddrescue
+- testdisk
+- coreutils
+    - shred
+- dislocker
+- ntfs-3g
+    - ntfsfix
