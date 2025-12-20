@@ -1,4 +1,5 @@
 .build/
+.vscode/
 config/binary
 config/bootstrap
 config/build
