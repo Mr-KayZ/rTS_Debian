@@ -9,6 +9,22 @@ See `config\package-lists\` for included packages.
 ## Build
 This process has been containerized and put into a DevOps pipeline requiring `podman` and `buildah`. The pipeline will produce an ISO based on the files contained in `/config`.
 
+### Local build
+Ensure you have docker installed. If running Windows, it is highly recommended to clone the repository to a Linux environment, such as [WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
+
+Within the Docker Desktop app, head to Resources > WSL Integration and `Enable integration with additional distros` and turn on the toggle switch for the distro you are using. Note: You do not need to manually install Docker within the WSL Linux environment separately, docker will provide this automatically.
+
+Test if Docker works by running `docker --version` in the shell.
+
+Compile and run the build with the following commands:
+```sh
+docker build -t rts-debian .
+docker run --rm --privileged -v "$(pwd):/repo" rts-debian
+```
+
+#### Common issues:
+* Errors were encountered while processing X package - Manually pull the Debian for docker directly by running `docker pull debian:trixie`.
+
 ## Tools list
 ### basics
 * curl
