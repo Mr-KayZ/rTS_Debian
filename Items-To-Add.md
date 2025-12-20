@@ -25,6 +25,7 @@
 - safecopy - Alternative to ddrescue for damaged media
 - shred - Secure file deletion (should be part of coreutils)
 - scrub - Pattern-based disk wiping
+- dislocker - Read and write to MS bitlocker encrypted drives
 
 ## Password/Windows recovery
 - chntpw - Offline Windows password reset (as opposed to Jayro's Lockpick)
