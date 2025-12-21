@@ -12,7 +12,6 @@
 # Manual list
 ---
 ## Hardware testing:
-- memtest86+ - RAM testing via GRUB menu
 - stress-ng - Comprehensive hardware validation - ADD
     - May replace simple stress and sysbench as this is for serious hardware validation
 - fio - Disk I/O benchmarking
@@ -53,4 +52,4 @@ Hardware info:
 - hardinfo - System profiler
 
 ## Stuff added so far:
-- Memtest86+
+- Memtest86+ - Added via GRUB menu
