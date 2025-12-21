@@ -9,47 +9,42 @@
     - Create scripts or bash scripts for ease of use for users, so all users have to enter are values and it will just run the program directly
     - Also for memtest86+ create a bash script to reboot via grub (both memtest86+ (legacy) and memtest86+-efi)
 
-# Manual list
----
-## Hardware testing:
-- stress-ng - Comprehensive hardware validation - ADD
-    - May replace simple stress and sysbench as this is for serious hardware validation
-- fio - Disk I/O benchmarking
+-------------------------------------------------------------------------------------
+## Issues:
 
-## Advanced hardware testing
-- inxi - Comprehensive hardware info (may be useful)
+### Terminal shortcut error: Untrusted application launcher
+The desktop file "xfce4-terminal.desktop" is in an insecure location and
+not marked as secure/executable. If you do not trust this program, click
+Cancel.
 
-## Recovery
-- safecopy - Alternative to ddrescue for damaged media - Better for severly damaged media, such as drive has loads of bad areas
+Exec=xfce4-terminal
 
-## Windows recovery
-- hivexregedit - Registry viewing/editing - Search up how to use this in thorough detail
-    - Part of libguestfs-tools (not preinstalled) at 500 mb - see what other tools are there
+-------------------------------------------------------------------------------------
+## Stuff to add:
 
----
-## Preinstalled packages
-Stress tests:
-- sysbench
-- stress
+### Stress tests
+- stress-ng - Comprehensive system stress testing (CPU, memory, I/O, kernel)
+- stress - Simple CPU/memory/disk stress testing
+- sysbench - Database and application benchmarking
 
-Disk tools:
-- gparted - Partition editor
-- smartmontools - SMART health monitoring
-- e2fsprogs - Has far more utilities beyond just badblocks, add them as a list
-- gsmartcontrol - GUI for smartmontools
-- nwipe/shred - Secure erase
-- hdparm - Drive configuration
-- nvme-cli - NVMe management
-- testdisk - Data recovery + Fixing boot drives
-- gddrescue - Failing drive recovery
-- clonezilla - Disk cloning/imaging
-- dislocker - Read and write to MS bitlocker encrypted drives
-- ntfsfix - Fix Windows and basic NTFS inconsistencies, clear dirty flags (part of ntfs-3g)
+### Disk benchmarking
+- bonnie++ - Filesystem benchmark (sequential I/O, random seeks, metadata operations)
+- fio - Advanced storage I/O benchmark (professional-grade, multi-threaded)
 
-Hardware info:
-- usbutils - USB device info
-- pciutils - PCI device info
-- hardinfo - System profiler
+## Hardware info
+- inxi - Comprehensive hardware info
 
+## File recovery tools
+- safecopy - Data recovery from damaged media
+
+### Windows recovery
+- libhivex-bin - Advanced Windows registry manipulation tools (hivexsh, hivexregedit)
+
+## Filesystem support
+- exfatprogs - exFAT filesystem support (modern cross-platform USB/SD cards)
+- btrfs-progs - Btrfs filesystem utilities (modern Linux filesystem)
+
+-------------------------------------------------------------------------------------
 ## Stuff added so far:
+- Shortcut to Terminal on desktop
 - Memtest86+ - Added via GRUB menu

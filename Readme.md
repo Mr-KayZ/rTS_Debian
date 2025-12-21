@@ -2,7 +2,7 @@
 
 This media was created to assist users trying to rescue their systems and data. It contains the tools required to recover files, check network issues, and manipulate or verify disks and their health.
 
-This is build is for Bullseye (11).
+This build is for Trixie (13). The desktop environment is XFCE4.
 
 See `config\package-lists\` for included packages.
 
@@ -27,48 +27,62 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 * Removing build files - The following command will remove everything excess from the build toolchain as per .gitignore (Including the ISO, so make sure you back it up elsewhere for testing!): `sudo git clean -Xdf`
 
 ## Tools list
-### basics
-* curl
-* wget
-* mousepad
-* firefox-esr
 
-### efi
-* [efibootmgr](https://wiki.archlinux.org/title/EFISTUB#efibootmgr)
+### Basic utilities
+* curl - Command-line tool for transferring data with URLs
+* wget - Network downloader for retrieving files via HTTP/HTTPS/FTP
+* mousepad - Simple GTK+ text editor
+* firefox-esr - Mozilla Firefox Extended Support Release web browser
+* openssh-client - SSH client for remote access
+* vim - Terminal text editor
 
-### disk tools
-* [gparted](https://rtech.support/disks/disk-management/gparted/)
-* [smartmontools](https://rtech.support/docs/disks/disk-health.html#smartmontools)
-* [gsmartcontrol](https://rtech.support/docs/disks/disk-health.html#gsmartcontrol-gui-method)
-* [nwipe](https://rtech.support/docs/disks/disk-wipe.html)
-* [hdparm](https://ata.wiki.kernel.org/index.php/ATA_Secure_Erase)
-* ntfs-3g
-* hfsprogs
-* [nvme-cli](https://rtech.support/docs/disks/disk-wipe.html#nvme-ssd)
-* mdadm
+### EFI
+* [efibootmgr](https://wiki.archlinux.org/title/EFISTUB#efibootmgr) - Manage UEFI boot entries and boot order
 
-### files
-* p7zip-full
+### Memory testing
+- [memtest86+](https://rtech.support/guides/memtest/memtest86/) - RAM testing tool, select from grub
 
-### net tools
-* dnsutils
-* traceroute
-* gnome-nettool
-* wireshark-gtk
+### Disk tools
+* [gparted](https://rtech.support/disks/disk-management/gparted/) - Partition editor
+* [smartmontools](https://rtech.support/docs/disks/disk-health.html#smartmontools) - SMART health monitoring
+* [gsmartcontrol](https://rtech.support/docs/disks/disk-health.html#gsmartcontrol-gui-method) - Secure disk erasure (DoD-compliant wiping)
+* [nwipe](https://rtech.support/docs/disks/disk-wipe.html) - Secure disk erasure (DoD-compliant wiping)
+* [hdparm](https://ata.wiki.kernel.org/index.php/ATA_Secure_Erase) - Drive configuration and benchmarking
+* [nvme-cli](https://rtech.support/docs/disks/disk-wipe.html#nvme-ssd) - NVMe SSD management and diagnostics
+* [lvm2](https://wiki.archlinux.org/title/LVM) - Logical Volume Manager utilities
+* [mdadm](https://wiki.archlinux.org/title/RAID) - Software RAID management
 
-### encryption
-* cryptsetup
-* dislocker
+### Filesystem support
+* e2fsprogs - Linux ext2/ext3/ext4 filesystem utilities (includes badblocks, debugfs, resize2fs)
+* ntfs-3g - Windows NTFS filesystem read/write support
+* hfsprogs - Apple HFS/HFS+ filesystem utilities (Mac support)
 
-### recovery tools
-* [testdisk](https://rtech.support/docs/disks/data-recovery/testdisk.html)
-* gddrescue
-* clonezilla
+### File recovery tools
+* [testdisk](https://rtech.support/docs/disks/data-recovery/testdisk.html) - Partition recovery and data recovery
+* gddrescue - Disk imaging and data recovery from failing drives
+* clonezilla - Disk cloning and imaging
 
-### hardware
-* usbutils
-* pciutils
-* hardinfo
+### Encryption
+* cryptsetup - LUKS disk encryption management
+* dislocker - BitLocker encrypted drive access (Windows drive recovery)
+
+### General file utilities
+* p7zip-full - 7-Zip compression utility (supports .7z, .zip, .rar archives)
+
+### Windows recovery
+- chntpw - Windows password reset and registry editing
+
+### Network tools
+* dnsutils - DNS lookup utilities (dig, nslookup, host)
+* traceroute - Network path tracing
+* [mtr-tiny](https://rtech.support/networking/mtr/) - Network diagnostic tool combining ping and traceroute
+* gnome-nettool - GUI network diagnostic tool (ping, netstat, traceroute, port scan)
+* wireshark - Network protocol analyzer and packet capture
+
+### Hardware info
+* usbutils - USB device info (lsusb)
+* pciutils - PCI device info (lspci)
+* hardinfo - System profiler and hardware information GUI
 
 #### A note on sudo in podman and --privileged
 It is required for the `chroot` stage of livebuild. See https://github.com/containers/podman/issues/4619
