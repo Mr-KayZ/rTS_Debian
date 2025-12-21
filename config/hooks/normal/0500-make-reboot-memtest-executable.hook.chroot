@@ -1,4 +1,0 @@
-#!/bin/sh
-
-# Make reboot-memtest executable
-chmod +x /usr/local/bin/reboot-memtest
