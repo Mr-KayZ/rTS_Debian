@@ -37,7 +37,7 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 * [efibootmgr](https://wiki.archlinux.org/title/EFISTUB#efibootmgr)
 
 ### disk tools
-* [gparted](https://rtech.support/docs/disks/gparted)
+* [gparted](https://rtech.support/disks/disk-management/gparted/)
 * [smartmontools](https://rtech.support/docs/disks/disk-health.html#smartmontools)
 * [gsmartcontrol](https://rtech.support/docs/disks/disk-health.html#gsmartcontrol-gui-method)
 * [nwipe](https://rtech.support/docs/disks/disk-wipe.html)
