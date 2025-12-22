@@ -42,6 +42,15 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 ### Memory testing
 - [memtest86+](https://rtech.support/guides/memtest/memtest86/) - RAM testing tool, select from grub
 
+### Stress tests
+* stress-ng Comprehensive system stress testing (CPU, memory, I/O, kernel)
+* stress - Simple CPU/memory/disk stress testing
+* sysbench - Database and application benchmarking
+
+### Disk benchmarking
+* bonnie++ - Filesystem benchmark (sequential I/O, random seeks, metadata operations)
+* fio - Advanced storage I/O benchmark (professional-grade, multi-threaded)
+
 ### Disk tools
 * [gparted](https://rtech.support/disks/disk-management/gparted/) - Partition editor
 * [smartmontools](https://rtech.support/docs/disks/disk-health.html#smartmontools) - SMART health monitoring
@@ -56,11 +65,14 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 * e2fsprogs - Linux ext2/ext3/ext4 filesystem utilities (includes badblocks, debugfs, resize2fs)
 * ntfs-3g - Windows NTFS filesystem read/write support
 * hfsprogs - Apple HFS/HFS+ filesystem utilities (Mac support)
+* exfatprogs - exFAT filesystem support (modern cross-platform USB/SD cards)
+* btrfs-progs - Btrfs filesystem utilities (modern Linux filesystem)
 
 ### File recovery tools
 * [testdisk](https://rtech.support/docs/disks/data-recovery/testdisk.html) - Partition recovery and data recovery
 * gddrescue - Disk imaging and data recovery from failing drives
 * clonezilla - Disk cloning and imaging
+* safecopy - Data recovery from damaged media
 
 ### Encryption
 * cryptsetup - LUKS disk encryption management
@@ -70,7 +82,8 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 * p7zip-full - 7-Zip compression utility (supports .7z, .zip, .rar archives)
 
 ### Windows recovery
-- chntpw - Windows password reset and registry editing
+* chntpw - Windows password reset and registry editing
+* libhivex-bin - Advanced Windows registry manipulation tools (hivexsh, hivexregedit)
 
 ### Network tools
 * dnsutils - DNS lookup utilities (dig, nslookup, host)
@@ -83,6 +96,7 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 * usbutils - USB device info (lsusb)
 * pciutils - PCI device info (lspci)
 * hardinfo - System profiler and hardware information GUI
+* inxi - Comprehensive hardware info
 
 #### A note on sudo in podman and --privileged
 It is required for the `chroot` stage of livebuild. See https://github.com/containers/podman/issues/4619

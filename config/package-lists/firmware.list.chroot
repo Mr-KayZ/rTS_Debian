@@ -1,10 +1,27 @@
-# amd firmware
-firmware-amd-graphics
+# firmware list
 
-# network firmware
-firmware-iwlwifi
-firmware-realtek
-firmware-atheros
-firmware-bnx2
-firmware-bnx2x
-firmware-brcm80211
+## CPU microcode (CRITICAL - always include)
+intel-microcode          # Intel CPU microcode updates (security/stability)
+amd64-microcode          # AMD CPU microcode updates (security/stability)
+
+## GPU/Graphics firmware
+firmware-amd-graphics    # AMD Radeon GPUs
+firmware-misc-nonfree    # Intel i915 graphics, QLogic, Nvidia, misc devices
+
+## Network firmware - WiFi
+firmware-iwlwifi         # Intel WiFi (most common in laptops)
+firmware-atheros         # Qualcomm Atheros WiFi
+firmware-realtek         # Realtek WiFi/network (very common)
+firmware-brcm80211       # Broadcom WiFi
+firmware-ralink          # Ralink/MediaTek WiFi (common USB adapters)
+firmware-ipw2x00         # Older Intel PRO/Wireless cards
+firmware-libertas        # Marvell Libertas WiFi
+firmware-zd1211          # ZyDAS ZD1211 WiFi dongles
+
+## Network firmware - Ethernet/Wired
+firmware-bnx2            # Broadcom NetXtreme gigabit
+firmware-bnx2x           # Broadcom NetXtreme II 10-gigabit
+firmware-qlogic          # QLogic Fibre Channel/iSCSI/network
+
+## Catch-all firmware
+firmware-linux-nonfree   # Generic firmware bundle (various devices)
