@@ -76,7 +76,7 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 
 ### Encryption
 * cryptsetup - LUKS disk encryption management
-* dislocker - BitLocker encrypted drive access (Windows drive recovery)
+* [dislocker](https://rtech.support/disks/encryption/dislocker/) - BitLocker encrypted drive access (Windows drive recovery)
 
 ### General file utilities
 * p7zip-full - 7-Zip compression utility (supports .7z, .zip, .rar archives)
