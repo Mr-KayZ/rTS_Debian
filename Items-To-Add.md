@@ -18,33 +18,3 @@ not marked as secure/executable. If you do not trust this program, click
 Cancel.
 
 Exec=xfce4-terminal
-
--------------------------------------------------------------------------------------
-## Stuff to add:
-
-### Stress tests
-- stress-ng - Comprehensive system stress testing (CPU, memory, I/O, kernel)
-- stress - Simple CPU/memory/disk stress testing
-- sysbench - Database and application benchmarking
-
-### Disk benchmarking
-- bonnie++ - Filesystem benchmark (sequential I/O, random seeks, metadata operations)
-- fio - Advanced storage I/O benchmark (professional-grade, multi-threaded)
-
-## Hardware info
-- inxi - Comprehensive hardware info
-
-## File recovery tools
-- safecopy - Data recovery from damaged media
-
-### Windows recovery
-- libhivex-bin - Advanced Windows registry manipulation tools (hivexsh, hivexregedit)
-
-## Filesystem support
-- exfatprogs - exFAT filesystem support (modern cross-platform USB/SD cards)
-- btrfs-progs - Btrfs filesystem utilities (modern Linux filesystem)
-
--------------------------------------------------------------------------------------
-## Stuff added so far:
-- Shortcut to Terminal on desktop
-- Memtest86+ - Added via GRUB menu
