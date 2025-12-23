@@ -9,7 +9,7 @@
     - Create scripts or bash scripts for ease of use for users, so all users have to enter are values and it will just run the program directly
     - Also for memtest86+ create a bash script to reboot via grub (both memtest86+ (legacy) and memtest86+-efi)
 
--------------------------------------------------------------------------------------
+---
 ## Issues:
 
 ### Terminal shortcut error: Untrusted application launcher
