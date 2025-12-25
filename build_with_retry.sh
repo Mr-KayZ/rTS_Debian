@@ -17,24 +17,27 @@ for attempt in $(seq 1 $MAX_RETRIES); do
     echo "=== Build Attempt $attempt - $(date) ===" >> "$LOG_FILE"
     
     # Run docker build and capture output
-    if docker build -t "$BUILD_TAG" . 2>&1 | tee -a "$LOG_FILE"; then
-        echo "Build succeeded on attempt $attempt"
-        echo "=== BUILD SUCCESSFUL ===" >> "$LOG_FILE"
+    docker build -t "$BUILD_TAG" . 2>&1 | tee -a "$LOG_FILE"
+    DOCKER_EXIT_CODE=${PIPESTATUS[0]}
+    
+    # Check for actual build failures in the log (live-build errors)
+    if grep -q "E: An unexpected failure occurred, exiting..." "$LOG_FILE" || \
+       grep -q "E: Sub-process /usr/bin/dpkg returned an error code" "$LOG_FILE" || \
+       grep -q "Errors were encountered while processing:" "$LOG_FILE" || \
+       [ $DOCKER_EXIT_CODE -ne 0 ]; then
         
-        # Extract warnings even on success for review
-        echo "" >> "$LOG_FILE"
-        echo "=== WARNINGS SUMMARY ===" >> "$LOG_FILE"
-        grep -E "(W:|WARNING|Warning:)" "$LOG_FILE" >> "$LOG_FILE" 2>/dev/null || echo "No warnings found" >> "$LOG_FILE"
-        
-        exit 0
-    else
         echo "Build failed on attempt $attempt"
         echo "=== BUILD FAILED ===" >> "$LOG_FILE"
         
         # Extract errors and warnings from log
         echo "" >> "${LOG_FILE}.errors"
-        echo "=== ERRORS - Attempt $attempt ===" >> "${LOG_FILE}.errors"
-        grep -E "(Failed to fetch|Unable to locate package|E: Package.*has no installation candidate|Err:|Failed|E:)" "$LOG_FILE" >> "${LOG_FILE}.errors" 2>/dev/null
+        echo "=== ERRORS - Attempt $attempt - $(date) ===" >> "${LOG_FILE}.errors"
+        
+        # Capture dpkg/apt errors
+        grep -E "(E: Sub-process|E: An unexpected failure|Errors were encountered while processing:|Failed to fetch|Unable to locate package|E: Package.*has no installation candidate|Err:|E:)" "$LOG_FILE" >> "${LOG_FILE}.errors" 2>/dev/null
+        
+        # Capture which packages failed
+        sed -n '/Errors were encountered while processing:/,/^$/p' "$LOG_FILE" >> "${LOG_FILE}.errors" 2>/dev/null
         
         echo "" >> "${LOG_FILE}.errors"
         echo "=== WARNINGS - Attempt $attempt ===" >> "${LOG_FILE}.errors"
@@ -44,11 +47,23 @@ for attempt in $(seq 1 $MAX_RETRIES); do
             echo "Retrying in 5 seconds..."
             sleep 5
         fi
+    else
+        echo "Build succeeded on attempt $attempt"
+        echo "=== BUILD SUCCESSFUL ===" >> "$LOG_FILE"
+        
+        # Extract warnings even on success for review
+        echo "" >> "$LOG_FILE"
+        echo "=== WARNINGS SUMMARY ===" >> "$LOG_FILE"
+        grep -E "(W:|WARNING|Warning:)" "$LOG_FILE" >> "$LOG_FILE" 2>/dev/null || echo "No warnings found" >> "$LOG_FILE"
+        
+        exit 0
     fi
 done
 
 echo ""
+echo "============================================="
 echo "Build failed after $MAX_RETRIES attempts"
 echo "Check $LOG_FILE for details"
 echo "Errors and warnings summary saved to: ${LOG_FILE}.errors"
+echo "============================================="
 exit 1
