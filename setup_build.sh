@@ -22,7 +22,7 @@ lb config \
 	--memtest none \
 	--updates true \
 	--iso-application "rts bootable diagnostics and recovery" \
-	--iso-preparer "PipeItToDevNull" \
+	--iso-preparer "PipeItToDevNull and Mr-KayZ" \
 	--iso-publisher "r/techsupport" \
 	--interactive false
 

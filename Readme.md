@@ -28,6 +28,8 @@ Compile and run the build with automatic retry:
 docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 ```
 
+Note: You will need to make it an executable in your linux distro: `chmod +x build_with_retry.sh`
+
 #### Common issues:
 * Errors were encountered while processing X package - Manually pull the Debian for docker directly by running `docker pull debian:trixie`.
 * Removing build files - The following command will remove everything excess from the build toolchain as per .gitignore (Including the ISO, so make sure you back it up elsewhere for testing!): `sudo git clean -Xdf`
