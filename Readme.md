@@ -51,10 +51,6 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 * bonnie++ - Filesystem benchmark (sequential I/O, random seeks, metadata operations)
 * fio - Advanced storage I/O benchmark (professional-grade, multi-threaded)
 
-### Disk monitoring
-* iotop-c - Real-time per-process disk I/O monitoring
-* sysstat - System performance tools (iostat, sar, mpstat)
-
 ### Disk tools
 * [gparted](https://rtech.support/disks/disk-management/gparted/) - Partition editor
 * [smartmontools](https://rtech.support/docs/disks/disk-health.html#smartmontools) - SMART health monitoring (command-line)
@@ -101,3 +97,8 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 * usbutils - USB device info (lsusb)
 * pciutils - PCI device info (lspci)
 * hardinfo - System profiler and hardware information GUI
+
+### System monitoring and logging
+glances          # Real-time system monitor with CSV/HTML export
+lm-sensors       # Hardware sensor monitoring (temperature, voltage, fans)
+psensor          # GUI temperature monitoring with graphs

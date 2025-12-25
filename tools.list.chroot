@@ -1,0 +1,67 @@
+# tools list
+## basics
+curl
+wget
+openssh-client
+vim
+
+## efi
+efibootmgr
+
+## memory testing
+memtest86+
+
+## stress testing
+stress-ng
+sysbench
+
+## disk tools
+gparted
+smartmontools
+gsmartcontrol
+nwipe
+hdparm
+nvme-cli
+lvm2
+mdadm
+
+## disk benchmarking
+bonnie++
+fio
+
+## filesystem support
+ntfs-3g
+hfsprogs
+exfatprogs
+btrfs-progs
+
+## file recovery tools
+testdisk
+gddrescue
+clonezilla
+safecopy
+
+## encryption
+cryptsetup
+dislocker
+
+## general file utilities
+p7zip-full
+
+## net tools
+dnsutils
+traceroute
+gnome-nettool
+wireshark
+mtr-tiny
+
+## hardware info
+usbutils
+pciutils
+hardinfo
+inxi
+
+## system monitoring and logging
+glances
+lm-sensors
+psensor
