@@ -31,30 +31,34 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 ### Basic utilities
 * curl - Command-line tool for transferring data with URLs
 * wget - Network downloader for retrieving files via HTTP/HTTPS/FTP
+* vim - Terminal text editor
+* nano - Simple terminal text editor (user-friendly)
 * mousepad - Simple GTK+ text editor
 * firefox-esr - Mozilla Firefox Extended Support Release web browser
 * openssh-client - SSH client for remote access
-* vim - Terminal text editor
 
 ### EFI
 * [efibootmgr](https://wiki.archlinux.org/title/EFISTUB#efibootmgr) - Manage UEFI boot entries and boot order
 
 ### Memory testing
-- [memtest86+](https://rtech.support/guides/memtest/memtest86/) - RAM testing tool, select from grub
+* [memtest86+](https://rtech.support/guides/memtest/memtest86/) - RAM testing tool (select from GRUB menu)
 
 ### Stress tests
-* stress-ng Comprehensive system stress testing (CPU, memory, I/O, kernel)
-* stress - Simple CPU/memory/disk stress testing
+* stress-ng - Comprehensive system stress testing (CPU, memory, I/O, kernel, 200+ stressors)
 * sysbench - Database and application benchmarking
 
 ### Disk benchmarking
 * bonnie++ - Filesystem benchmark (sequential I/O, random seeks, metadata operations)
 * fio - Advanced storage I/O benchmark (professional-grade, multi-threaded)
 
+### Disk monitoring
+* iotop-c - Real-time per-process disk I/O monitoring
+* sysstat - System performance tools (iostat, sar, mpstat)
+
 ### Disk tools
 * [gparted](https://rtech.support/disks/disk-management/gparted/) - Partition editor
-* [smartmontools](https://rtech.support/docs/disks/disk-health.html#smartmontools) - SMART health monitoring
-* [gsmartcontrol](https://rtech.support/docs/disks/disk-health.html#gsmartcontrol-gui-method) - Secure disk erasure (DoD-compliant wiping)
+* [smartmontools](https://rtech.support/docs/disks/disk-health.html#smartmontools) - SMART health monitoring (command-line)
+* [gsmartcontrol](https://rtech.support/docs/disks/disk-health.html#gsmartcontrol-gui-method) - GUI frontend for smartmontools
 * [nwipe](https://rtech.support/docs/disks/disk-wipe.html) - Secure disk erasure (DoD-compliant wiping)
 * [hdparm](https://ata.wiki.kernel.org/index.php/ATA_Secure_Erase) - Drive configuration and benchmarking
 * [nvme-cli](https://rtech.support/docs/disks/disk-wipe.html#nvme-ssd) - NVMe SSD management and diagnostics
@@ -69,7 +73,7 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 * btrfs-progs - Btrfs filesystem utilities (modern Linux filesystem)
 
 ### File recovery tools
-* [testdisk](https://rtech.support/docs/disks/data-recovery/testdisk.html) - Partition recovery and data recovery
+* [testdisk](https://rtech.support/docs/disks/data-recovery/testdisk.html) - Partition recovery and data recovery (includes photorec)
 * gddrescue - Disk imaging and data recovery from failing drives
 * clonezilla - Disk cloning and imaging
 * safecopy - Data recovery from damaged media
@@ -93,10 +97,7 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 * wireshark - Network protocol analyzer and packet capture
 
 ### Hardware info
+* inxi - Comprehensive CLI hardware info
 * usbutils - USB device info (lsusb)
 * pciutils - PCI device info (lspci)
 * hardinfo - System profiler and hardware information GUI
-* inxi - Comprehensive hardware info
-
-#### A note on sudo in podman and --privileged
-It is required for the `chroot` stage of livebuild. See https://github.com/containers/podman/issues/4619

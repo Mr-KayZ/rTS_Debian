@@ -13,7 +13,6 @@ memtest86+
 
 ## stress testing
 stress-ng
-stress
 sysbench
 
 ## disk tools
