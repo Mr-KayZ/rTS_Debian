@@ -31,3 +31,6 @@ Exec=xfce4-terminal
         - 1366x768 (for older laptops)
 - Add bash scripts for all other tools (See Readme.md)
     - Potentially create a guide to easily follow within the terminal.
+
+## NOTE:
+For stress tests, especially with the bash script, also add an automatic logging option via glances and lm-sensors so that others can go over logs and see exact details about the thing, especially if anything seems broken or wrong.
