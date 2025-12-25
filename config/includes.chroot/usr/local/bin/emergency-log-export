@@ -1,0 +1,250 @@
+#!/bin/bash
+# emergency-log-export - Quickly save all crash logs to USB
+
+clear
+echo "==============================================="
+echo "  rTS Debian - Emergency Log Export"
+echo "==============================================="
+echo ""
+echo "This tool will save all system logs to a USB drive"
+echo "for later analysis or forum posting."
+echo ""
+
+# Find mounted USB drives
+echo "Looking for USB drives..."
+USB_DRIVES=$(lsblk -nlo NAME,TYPE,MOUNTPOINT | grep "part" | grep -v "loop" | awk '{if ($3 != "" && $3 != "/") print $3}')
+
+if [ -z "$USB_DRIVES" ]; then
+    echo ""
+    echo "ERROR: No mounted USB drives found!"
+    echo ""
+    echo "Available unmounted partitions:"
+    lsblk -o NAME,SIZE,TYPE,FSTYPE,LABEL | grep -E "sd[b-z]|nvme[1-9]"
+    echo ""
+    read -p "Enter mount point to save logs (or press Ctrl+C to cancel): " DEST
+    
+    if [ -z "$DEST" ]; then
+        echo "No destination specified. Exiting."
+        exit 1
+    fi
+    
+    # Try to mount if it looks like a device
+    if [[ "$DEST" == /dev/* ]]; then
+        echo "Attempting to mount $DEST..."
+        sudo mkdir -p /mnt/emergency_usb
+        if sudo mount "$DEST" /mnt/emergency_usb; then
+            DEST="/mnt/emergency_usb"
+            echo "SUCCESS: Mounted at $DEST"
+        else
+            echo "ERROR: Failed to mount $DEST"
+            exit 1
+        fi
+    fi
+else
+    echo "Found mounted drives:"
+    echo "$USB_DRIVES"
+    echo ""
+    
+    # If multiple drives, let user choose
+    DRIVE_COUNT=$(echo "$USB_DRIVES" | wc -l)
+    if [ "$DRIVE_COUNT" -gt 1 ]; then
+        echo "Multiple drives found. Enter mount point:"
+        read -p "Destination: " DEST
+    else
+        DEST=$(echo "$USB_DRIVES" | head -1)
+        echo "Using: $DEST"
+    fi
+fi
+
+# Create log directory
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+LOGDIR="$DEST/rts_crash_logs_$TIMESTAMP"
+mkdir -p "$LOGDIR"
+
+if [ ! -d "$LOGDIR" ]; then
+    echo "ERROR: Cannot create directory: $LOGDIR"
+    exit 1
+fi
+
+echo ""
+echo "Saving logs to: $LOGDIR"
+echo ""
+
+# Progress indicator
+spin() {
+    local pid=$1
+    local delay=0.1
+    local spinstr='|/-\\'
+    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
+        local temp=${spinstr#?}
+        printf " [%c]  " "$spinstr"
+        local spinstr=$temp${spinstr%"$temp"}
+        sleep $delay
+        printf "\b\b\b\b\b\b"
+    done
+    printf "    \b\b\b\b"
+}
+
+# Collect basic system info
+echo -n "Collecting hardware info..."
+{
+    echo "=== Hardware Information ===" > "$LOGDIR/hardware_info.txt"
+    echo "" >> "$LOGDIR/hardware_info.txt"
+    inxi -F 2>/dev/null >> "$LOGDIR/hardware_info.txt"
+    lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINT >> "$LOGDIR/hardware_info.txt"
+    echo "" >> "$LOGDIR/hardware_info.txt"
+    echo "=== PCI Devices ===" >> "$LOGDIR/hardware_info.txt"
+    lspci >> "$LOGDIR/hardware_info.txt"
+    echo "" >> "$LOGDIR/hardware_info.txt"
+    echo "=== USB Devices ===" >> "$LOGDIR/hardware_info.txt"
+    lsusb >> "$LOGDIR/hardware_info.txt"
+} &
+PID=$!
+spin $PID
+wait $PID
+echo " Done"
+
+# Kernel messages
+echo -n "Collecting kernel messages (dmesg)..."
+{
+    dmesg > "$LOGDIR/dmesg_full.txt"
+    dmesg --level=err,crit,alert,emerg > "$LOGDIR/dmesg_errors.txt"
+    dmesg | grep -i "error\|fail\|warn\|bug\|oops\|panic\|segfault" > "$LOGDIR/dmesg_issues.txt"
+} &
+PID=$!
+spin $PID
+wait $PID
+echo " Done"
+
+# System journal
+echo -n "Collecting system journal (journalctl)..."
+{
+    journalctl -b > "$LOGDIR/journalctl_full.txt" 2>/dev/null
+    journalctl -p err -b > "$LOGDIR/journalctl_errors.txt" 2>/dev/null
+    journalctl -k -b > "$LOGDIR/journalctl_kernel.txt" 2>/dev/null
+} &
+PID=$!
+spin $PID
+wait $PID
+echo " Done"
+
+# Xorg logs
+echo -n "Collecting display server logs..."
+{
+    if [ -f /var/log/Xorg.0.log ]; then
+        cp /var/log/Xorg.0.log "$LOGDIR/"
+        grep -i "error\|fail\|warn" /var/log/Xorg.0.log > "$LOGDIR/Xorg_errors.txt" 2>/dev/null
+    fi
+} &
+PID=$!
+spin $PID
+wait $PID
+echo " Done"
+
+# Temperature sensors
+echo -n "Collecting temperature sensors..."
+{
+    if command -v sensors &> /dev/null; then
+        sensors > "$LOGDIR/sensors.txt" 2>/dev/null
+    fi
+} &
+PID=$!
+spin $PID
+wait $PID
+echo " Done"
+
+# Disk SMART data
+echo -n "Collecting disk health (SMART)..."
+{
+    for disk in /dev/sd[a-z] /dev/nvme[0-9]n[0-9]; do
+        if [ -e "$disk" ]; then
+            DISKNAME=$(basename "$disk")
+            sudo smartctl -a "$disk" > "$LOGDIR/smart_$DISKNAME.txt" 2>/dev/null
+        fi
+    done
+} &
+PID=$!
+spin $PID
+wait $PID
+echo " Done"
+
+# Memory info
+echo -n "Collecting memory information..."
+{
+    free -h > "$LOGDIR/memory.txt"
+    cat /proc/meminfo >> "$LOGDIR/memory.txt"
+} &
+PID=$!
+spin $PID
+wait $PID
+echo " Done"
+
+# Running processes
+echo -n "Collecting process list..."
+{
+    ps aux > "$LOGDIR/processes.txt"
+} &
+PID=$!
+spin $PID
+wait $PID
+echo " Done"
+
+# Create summary file
+echo -n "Creating summary..."
+cat > "$LOGDIR/README.txt" << EOF
+rTS Debian - Crash Log Export
+==============================
+Date: $(date)
+Hostname: $(hostname)
+Kernel: $(uname -r)
+
+Files Included:
+---------------
+- hardware_info.txt     : System hardware information
+- dmesg_full.txt        : Complete kernel message log
+- dmesg_errors.txt      : Kernel errors only
+- dmesg_issues.txt      : Filtered problematic messages
+- journalctl_full.txt   : Complete system journal
+- journalctl_errors.txt : System errors only
+- journalctl_kernel.txt : Kernel-specific journal
+- Xorg.0.log           : Display server log
+- Xorg_errors.txt      : Display server errors
+- smart_*.txt          : Disk health information
+- sensors.txt          : Temperature readings
+- memory.txt           : RAM usage information
+- processes.txt        : Running processes
+
+How to Use:
+-----------
+1. Zip this folder: zip -r crash_logs.zip rts_crash_logs_*
+2. Upload to file sharing service (e.g., Google Drive, Dropbox)
+3. Post link on r/techsupport with description of issue
+
+Common Issues to Look For:
+--------------------------
+- Check dmesg_errors.txt for hardware failures
+- Check Xorg_errors.txt for GPU/display issues
+- Check smart_*.txt for failing hard drives
+- Check sensors.txt for overheating
+EOF
+echo " Done"
+
+echo ""
+echo "==============================================="
+echo "Log export complete!"
+echo ""
+echo "Location: $LOGDIR"
+echo "Files created:"
+ls -lh "$LOGDIR" | tail -n +2 | awk '{printf "   %s  %s\n", $5, $9}'
+echo ""
+echo "Total size: $(du -sh "$LOGDIR" | cut -f1)"
+echo ""
+echo "Next steps:"
+echo "1. Review the logs (especially *_errors.txt files)"
+echo "2. Create a zip: cd $DEST && zip -r crash_logs.zip rts_crash_logs_*"
+echo "3. Post logs to r/techsupport or tech forum"
+echo ""
+echo "TIP: Focus on dmesg_errors.txt and journalctl_errors.txt first"
+echo "==============================================="
+echo ""
+read -p "Press Enter to exit..."
