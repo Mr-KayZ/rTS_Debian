@@ -14,6 +14,9 @@ memtest86+
 ## stress testing
 stress-ng
 sysbench
+glmark2
+mesa-utils
+vulkan-tools
 
 ## disk tools
 gparted

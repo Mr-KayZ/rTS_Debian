@@ -18,10 +18,6 @@ Cancel.
 Exec=xfce4-terminal
 
 ---
-## Items to add:
-- GPU tester
-
----
 ## Add bash scripts
 - Add bash scripts for different monitor sizes as well just in case. Call it "Change display resolution".
     - Also add common display resolutions:
