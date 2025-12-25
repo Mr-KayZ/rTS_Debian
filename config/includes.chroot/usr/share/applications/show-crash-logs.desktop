@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=View System Crash Logs
+Comment=Display recent system errors and kernel messages
+Exec=x-terminal-emulator -e bash -c "show-crash-logs; exec bash"
+Icon=utilities-system-monitor
+Terminal=true
+Categories=System;Monitor;
+Keywords=crash;error;log;kernel;debug;dmesg;journal;
