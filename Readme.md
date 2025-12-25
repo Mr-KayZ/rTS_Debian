@@ -99,6 +99,6 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 * hardinfo - System profiler and hardware information GUI
 
 ### System monitoring and logging
-glances          # Real-time system monitor with CSV/HTML export
-lm-sensors       # Hardware sensor monitoring (temperature, voltage, fans)
-psensor          # GUI temperature monitoring with graphs
+glances - Real-time system monitor with CSV/HTML export
+lm-sensors - Hardware sensor monitoring (temperature, voltage, fans)
+psensor - GUI temperature monitoring with graphs
