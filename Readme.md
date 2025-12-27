@@ -44,6 +44,14 @@ unqualified-search-registries = ["docker.io"]
 "library" = "docker.io/library"
 EOF
 ```
+* **Podman cleanup process** - The following will remove dangling containers, pods, networks, and optionally volumes (not by default):
+```sh
+podman system prune
+```
+* **Podman cleanup process (everything)** - Cleans up all unused containers, images, pods, and volumes:
+```sh
+podman system prune -a --volumes
+```
 
 ### Local build - Using Docker (Deprecated)
 Ensure you have docker installed. If running Windows, it is highly recommended to clone the repository to a Linux environment, such as [WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
