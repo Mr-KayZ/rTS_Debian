@@ -24,7 +24,9 @@ podman run --rm --privileged -v "$(pwd):/repo" rts-debian
 
 #### Common issues:
 * **Errors were encountered while processing X package** - Manually pull the Debian image: 
-  - Podman: `podman pull docker.io/library/debian:trixie`
+```sh
+podman pull docker.io/library/debian:trixie
+```
 * **Removing build files** - The following command will remove everything excess from the build toolchain as per .gitignore (Including the ISO, so make sure you back it up elsewhere for testing!): `sudo git clean -Xdf`
 * **Podman: Permission denied / cgroupv2 systemd warnings** - Configure Podman to use cgroupfs:
 ```sh
