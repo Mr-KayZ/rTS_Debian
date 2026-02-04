@@ -11,22 +11,8 @@ Install https://github.com/linuxhw/hw-probe?tab=readme-ov-file - For hardware da
 
 ---
 ## Issues:
-
-### Terminal shortcut error: Untrusted application launcher
-The desktop file "xfce4-terminal.desktop" is in an insecure location and
-not marked as secure/executable. If you do not trust this program, click
-Cancel.
-
-Exec=xfce4-terminal
-
 ---
 ## Add bash scripts
-- Add bash scripts for different monitor sizes as well just in case. Call it "Change display resolution".
-    - Also add common display resolutions:
-        - 3840x2160
-        - 2560x1440
-        - 1920x1080
-        - 1366x768 (for older laptops)
 - Add bash scripts for all other tools (See Readme.md)
     - Potentially create a guide to easily follow within the terminal.
 
