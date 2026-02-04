@@ -1,0 +1,21 @@
+#!/bin/bash
+# Set default display resolution to 1280x720 (720p)
+# This ensures compatibility with the widest range of monitors
+
+# Wait for X server to be ready
+sleep 2
+
+# Get the primary display output name
+PRIMARY_OUTPUT=$(xrandr | grep " connected" | head -n1 | awk '{print $1}')
+
+if [ -n "$PRIMARY_OUTPUT" ]; then
+    # Try to set 1280x720 if available
+    if xrandr | grep -q "1280x720"; then
+        xrandr --output "$PRIMARY_OUTPUT" --mode 1280x720
+    else
+        # Fallback: add the mode if it doesn't exist
+        xrandr --newmode "1280x720_60.00" 74.50 1280 1344 1472 1664 720 723 728 748 -hsync +vsync 2>/dev/null || true
+        xrandr --addmode "$PRIMARY_OUTPUT" 1280x720_60.00 2>/dev/null || true
+        xrandr --output "$PRIMARY_OUTPUT" --mode 1280x720_60.00 2>/dev/null || true
+    fi
+fi
