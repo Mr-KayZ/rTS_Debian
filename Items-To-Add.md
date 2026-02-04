@@ -6,6 +6,8 @@
 - Add links in folders for different catagories of stuff like a folder called "Hardware testing", "Disk tools", etc.
     - Create scripts or bash scripts for ease of use for users, so all users have to enter are values and it will just run the program directly
     - Also for memtest86+ create a bash script to reboot via grub (both memtest86+ (legacy) and memtest86+-efi)
+ 
+Install https://github.com/linuxhw/hw-probe?tab=readme-ov-file - For hardware data gathering! - Recheck if it also does SMART checks and other stuff!
 
 ---
 ## Issues:
