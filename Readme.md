@@ -100,6 +100,7 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 * usbutils - USB device info (lsusb)
 * pciutils - PCI device info (lspci)
 * hardinfo - System profiler and hardware information GUI
+* hw-probe - Comprehensive hardware probing and reporting
 
 ### System monitoring and logging
 glances - Real-time system monitor with CSV/HTML export
