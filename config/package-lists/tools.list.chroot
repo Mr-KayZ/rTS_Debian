@@ -33,6 +33,7 @@ bonnie++
 fio
 
 ## filesystem support
+e2fsprogs
 ntfs-3g
 hfsprogs
 exfatprogs
@@ -64,3 +65,11 @@ pciutils
 hardinfo
 inxi
 hw-probe
+
+## system monitoring
+htop
+iotop
+iftop
+glances
+lm-sensors
+psensor
