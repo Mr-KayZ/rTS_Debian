@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Set Default Resolution
-Comment=Set display to 1280x720 for maximum compatibility
-Exec=/usr/local/bin/set-default-resolution
-NoDisplay=true
-X-GNOME-Autostart-enabled=true
