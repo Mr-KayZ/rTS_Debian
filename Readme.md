@@ -51,7 +51,6 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 * vulkan-tools - Vulkan graphics API testing and validation utilities
 
 ### Disk benchmarking
-* bonnie++ - Filesystem benchmark (sequential I/O, random seeks, metadata operations)
 * fio - Advanced storage I/O benchmark (professional-grade, multi-threaded)
 
 ### Disk tools

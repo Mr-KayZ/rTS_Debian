@@ -29,7 +29,6 @@ lvm2
 mdadm
 
 ## disk benchmarking
-bonnie++
 fio
 
 ## filesystem support

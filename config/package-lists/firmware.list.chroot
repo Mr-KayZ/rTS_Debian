@@ -8,20 +8,5 @@ amd64-microcode
 firmware-amd-graphics
 firmware-misc-nonfree
 
-# WiFi firmware
-firmware-iwlwifi
-firmware-atheros
-firmware-realtek
-firmware-brcm80211
-firmware-ralink
-firmware-ipw2x00
-firmware-libertas
-firmware-zd1211
-
-# Ethernet/Network firmware
-firmware-bnx2
-firmware-bnx2x
-firmware-qlogic
-
-# Generic firmware bundle
+# Generic firmware bundle (includes all WiFi and network firmware)
 firmware-linux-nonfree
