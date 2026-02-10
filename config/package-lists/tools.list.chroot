@@ -7,7 +7,6 @@ vim
 
 ## efi
 efibootmgr
-boot-repair
 
 ## memory testing
 memtest86+
