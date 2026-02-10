@@ -42,6 +42,7 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 
 ### EFI
 * [efibootmgr](https://wiki.archlinux.org/title/EFISTUB#efibootmgr) - Manage UEFI boot entries and boot order
+* boot-repair - Automated GRUB and bootloader repair tool (Only works with dual boot systems)
 
 ### Memory testing
 * [memtest86+](https://rtech.support/guides/memtest/memtest86/) - RAM testing tool (select from GRUB menu)
