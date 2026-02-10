@@ -48,9 +48,7 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 
 ### Stress tests
 * stress-ng - Comprehensive system stress testing (CPU, memory, I/O, kernel, 200+ stressors)
-* glmark2 - OpenGL 2.0 and ES 2.0 benchmark with multiple rendering test scenarios
-* mesa-utils - OpenGL utilities (glxinfo for driver info, glxgears for basic testing)
-* vulkan-tools - Vulkan graphics API testing and validation utilities
+* sysbench - Database and application benchmarking tool
 
 ### Disk benchmarking
 * fio - Advanced storage I/O benchmark (professional-grade, multi-threaded)
