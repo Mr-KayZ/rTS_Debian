@@ -13,7 +13,6 @@ memtest86+
 
 ## stress testing
 stress-ng
-sysbench
 glmark2
 mesa-utils
 vulkan-tools
@@ -61,14 +60,11 @@ mtr-tiny
 ## hardware info
 usbutils
 pciutils
-hardinfo
 inxi
 hw-probe
 
 ## system monitoring
 htop
 iotop
-iftop
-glances
 lm-sensors
 psensor

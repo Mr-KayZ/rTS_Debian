@@ -32,10 +32,13 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 * curl - Command-line tool for transferring data with URLs
 * wget - Network downloader for retrieving files via HTTP/HTTPS/FTP
 * vim - Terminal text editor
-* nano - Simple terminal text editor (user-friendly)
+* nano - Simple terminal text editor (pre-included with Debian)
 * mousepad - Simple GTK+ text editor
 * firefox-esr - Mozilla Firefox Extended Support Release web browser
 * openssh-client - SSH client for remote access
+* rsync - Fast file transfer and synchronization tool (pre-included with Debian)
+* sudo - Execute commands as another user (pre-included with Debian)
+* tar, gzip, bzip2 - Archive and compression utilities (pre-included with Debian)
 
 ### EFI
 * [efibootmgr](https://wiki.archlinux.org/title/EFISTUB#efibootmgr) - Manage UEFI boot entries and boot order
@@ -45,7 +48,6 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 
 ### Stress tests
 * stress-ng - Comprehensive system stress testing (CPU, memory, I/O, kernel, 200+ stressors)
-* sysbench - Database and application benchmarking
 * glmark2 - OpenGL 2.0 and ES 2.0 benchmark with multiple rendering test scenarios
 * mesa-utils - OpenGL utilities (glxinfo for driver info, glxgears for basic testing)
 * vulkan-tools - Vulkan graphics API testing and validation utilities
@@ -62,6 +64,8 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 * [nvme-cli](https://rtech.support/docs/disks/disk-wipe.html#nvme-ssd) - NVMe SSD management and diagnostics
 * [lvm2](https://wiki.archlinux.org/title/LVM) - Logical Volume Manager utilities
 * [mdadm](https://wiki.archlinux.org/title/RAID) - Software RAID management
+* fdisk - Partition table manipulator (pre-included with Debian)
+* parted - Partition editor (pre-included with Debian)
 
 ### Filesystem support
 * e2fsprogs - Linux ext2/ext3/ext4 filesystem utilities (includes badblocks, debugfs, resize2fs)
@@ -93,15 +97,17 @@ docker run --rm --privileged -v "$(pwd):/repo" rts-debian
 * [mtr-tiny](https://rtech.support/networking/mtr/) - Network diagnostic tool combining ping and traceroute
 * gnome-nettool - GUI network diagnostic tool (ping, netstat, traceroute, port scan)
 * wireshark - Network protocol analyzer and packet capture
+* ping - ICMP echo tool (pre-included via iputils-ping)
+* iproute2 - Advanced IP routing and network configuration tools (ip, ss, etc.) (pre-included with Debian)
 
 ### Hardware info
 * inxi - Comprehensive CLI hardware info
 * usbutils - USB device info (lsusb)
 * pciutils - PCI device info (lspci)
-* hardinfo - System profiler and hardware information GUI
 * hw-probe - Comprehensive hardware probing and reporting
 
 ### System monitoring and logging
-* glances - Real-time system monitor with CSV/HTML export
+* htop - Interactive process viewer
+* iotop - I/O monitoring tool
 * lm-sensors - Hardware sensor monitoring (temperature, voltage, fans)
 * psensor - GUI temperature monitoring with graphs
